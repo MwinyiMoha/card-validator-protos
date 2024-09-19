@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package protos;
+
+option go_package = "./protos";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service AppsService {
+
+  rpc GetApps(google.protobuf.Empty) returns (GetAppsResponse) {
+    option (google.api.http) = {
+      get: "/v1/apps"
+    };
+  }
+
+  rpc GetApp(GetAppRequest) returns (App) {
+    option (google.api.http) = {
+      get: "/v1/apps/{app_id}"
+    };
+  }
+
+  rpc CreateApp(CreateAppRequest) returns (App) {
+    option (google.api.http) = {
+      post: "/v1/apps"
+      body: "app"
+    };
+  }
+
+  rpc RefreshAppKey(RefreshAppKeyRequest) returns (App) {
+    option (google.api.http) = {
+      get: "/v1/apps/refresh-key"
+    };
+  }
+
+  rpc DecodeAppKey(DecodeAppKeyRequest) returns (DecodeAppKeyResponse) {
+    option (google.api.http) = {
+      get: "/v1/apps/decode"
+    };
+  }
+
+  rpc DeleteApp(DeleteAppRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/v1/apps/{app_id}"
+    };
+  }
+
+}
+
+enum Environment {
+  ENVIRONMENT_UNSPECIFIED = 0;
+  ENVIRONMENT_STAGING = 1;
+  ENVIRONMENT_PRODUCTION = 2;
+}
+
+enum OwnerType {
+  OWNER_TYPE_UNSPECIFIED = 0;
+  OWNER_TYPE_INDIVIDUAL = 1;
+  OWNER_TYPE_ORGANIZATION = 2;
+}
+
+message App {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  Environment environment = 4;
+  OwnerType owner_type = 5;
+  string app_key = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+message GetAppsResponse {
+  repeated App apps = 1;
+}
+
+message GetAppRequest {
+  string app_id = 1;
+}
+
+message CreateAppRequest {
+  App app = 1;
+}
+
+message RefreshAppKeyRequest {
+  string app_id = 1;
+}
+
+message DecodeAppKeyRequest {
+  string app_key = 1;
+}
+
+message DecodeAppKeyResponse {
+  string app_id = 1;
+}
+
+message DeleteAppRequest {
+  string app_id = 1;
+}
