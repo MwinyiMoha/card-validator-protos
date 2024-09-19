@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package protos;
+
+option go_package = "./protos";
+
+import "google/api/annotations.proto";
+
+service CardValidatorService {
+
+  rpc ValidateNumber(ValidateNumberRequest) returns (ValidateNumberResponse) {
+    option (google.api.http) = {
+      get: "/v1/validate"
+    };
+  }
+
+}
+
+message ValidateNumberRequest {
+  string card_number = 1;
+}
+
+message ValidateNumberResponse {
+  bool valid = 1;
+  CardData data = 2;
+}
+
+message CardData {
+  string card_number = 1;
+  ProviderInformation provider_information = 2;
+}
+
+message ProviderInformation {
+  string name = 1;
+  string icon_url = 2;
+}
+
