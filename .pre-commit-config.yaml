@@ -1,0 +1,5 @@
+repos:
+  - repo: https://github.com/yoheimuta/protolint
+    rev: v0.50.5
+    hooks:
+      - id: protolint
