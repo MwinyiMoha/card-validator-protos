@@ -29,7 +29,7 @@ service AppsService {
     };
   }
 
-  rpc RefreshAppKey(RefreshAppKeyRequest) returns (App) {
+  rpc RefreshAppKey(RefreshAppKeyRequest) returns (RefreshAppKeyResponse) {
     option (google.api.http) = {
       get: "/v1/apps/refresh-key"
     };
@@ -51,7 +51,7 @@ service AppsService {
 
 enum Environment {
   ENVIRONMENT_UNSPECIFIED = 0;
-  ENVIRONMENT_STAGING = 1;
+  ENVIRONMENT_SANDBOX = 1;
   ENVIRONMENT_PRODUCTION = 2;
 }
 
@@ -69,6 +69,7 @@ message App {
   OwnerType owner_type = 5;
   string app_key = 6;
   google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp last_updated = 8;
 }
 
 message GetAppsResponse {
@@ -85,6 +86,10 @@ message CreateAppRequest {
 
 message RefreshAppKeyRequest {
   string app_id = 1;
+}
+
+message RefreshAppKeyResponse {
+  string new_key = 1;
 }
 
 message DecodeAppKeyRequest {
