@@ -12,38 +12,38 @@ service AppsService {
 
   rpc GetApps(google.protobuf.Empty) returns (GetAppsResponse) {
     option (google.api.http) = {
-      get: "/v1/apps"
+      get: "/apps-svc/v1/apps"
     };
   }
 
   rpc GetApp(GetAppRequest) returns (App) {
     option (google.api.http) = {
-      get: "/v1/apps/{app_id}"
+      get: "/apps-svc/v1/apps/{app_id}"
     };
   }
 
   rpc CreateApp(CreateAppRequest) returns (App) {
     option (google.api.http) = {
-      post: "/v1/apps"
+      post: "/apps-svc/v1/apps"
       body: "app"
     };
   }
 
   rpc RefreshAppKey(RefreshAppKeyRequest) returns (RefreshAppKeyResponse) {
     option (google.api.http) = {
-      get: "/v1/apps/refresh-key"
+      get: "/apps-svc/v1/apps/refresh-key"
     };
   }
 
   rpc DecodeAppKey(DecodeAppKeyRequest) returns (DecodeAppKeyResponse) {
     option (google.api.http) = {
-      get: "/v1/apps/decode"
+      get: "/apps-svc/v1/apps/decode"
     };
   }
 
   rpc DeleteApp(DeleteAppRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/v1/apps/{app_id}"
+      delete: "/apps-svc/v1/apps/{app_id}"
     };
   }
 
