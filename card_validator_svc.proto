@@ -10,7 +10,7 @@ service CardValidatorService {
 
   rpc ValidateNumber(ValidateNumberRequest) returns (ValidateNumberResponse) {
     option (google.api.http) = {
-      get: "/v1/validate"
+      get: "/card-validator-svc/v1/validate"
     };
   }
 
