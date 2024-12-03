@@ -5,6 +5,8 @@ package protos;
 option go_package = "./protos";
 
 import "google/api/annotations.proto";
+import "google/rpc/status.proto";
+import "google/rpc/error_details.proto";
 
 service CardValidatorService {
 
